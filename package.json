@@ -9,18 +9,19 @@
   "dependencies": {
     "bitfield": "~0.1.0",
     "clivas": "~0.1.4",
-    "range-parser": "0.0.4",
     "hat": "0.0.3",
     "mime": "~1.2.9",
-    "numeral": "~1.4.7",
-    "readable-stream": "~1.0.2",
-    "read-torrent": "~0.1.0",
     "network-address": "0.0.4",
+    "numeral": "~1.4.7",
+    "once": "~1.1.1",
+    "opensubtitles-client": "^2.5.0",
+    "optimist": "~0.3.5",
+    "part-file": "~0.1.0",
     "peer-wire-protocol": "~0.3.6",
     "peer-wire-swarm": "~0.0.9",
-    "part-file": "~0.1.0",
-    "optimist": "~0.3.5",
-    "speedometer": "~0.1.1",
-    "once": "~1.1.1"
+    "range-parser": "0.0.4",
+    "read-torrent": "~0.1.0",
+    "readable-stream": "~1.0.2",
+    "speedometer": "~0.1.1"
   }
 }

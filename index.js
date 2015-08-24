@@ -13,6 +13,7 @@ var once = require('once');
 var net = require('net');
 var createStorage = require('./storage');
 var createServer = require('./server');
+var subtitles = require('./subtitles');
 
 module.exports = function(filename, opts, ready) {
 	if (!ready) {
@@ -41,9 +42,12 @@ module.exports = function(filename, opts, ready) {
 		});
 	};
 
+	
+
 	var noop = function() {};
 
 	readTorrent(filename, function(err, torrent) {
+
 		if (err) return ready(err);
 
 		peerflix.torrent = torrent;
@@ -61,6 +65,9 @@ module.exports = function(filename, opts, ready) {
 
 		var have = bitfield(torrent.pieces.length);
 		var requesting = {};
+		if(opts.d) {
+			subtitles(selected, opts.d);
+		}
 
 		storage.on('readable', function(i) {
 			delete requesting[i];

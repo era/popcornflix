@@ -24,6 +24,7 @@ var argv = optimist
 	.alias('m', 'mplayer').describe('m', 'autoplay in mplayer**')
 	.alias('o', 'omx').describe('o', 'autoplay in omx**')
 	.alias('j', 'jack').describe('j', 'autoplay in omx** using the audio jack')
+	.alias('d', 'download_subititles').describe('d', 'it uses the name of the file to search a good subtitle in the opensubtitles')
 	.describe('path', 'change buffer file path')
 	.argv;
 
@@ -45,6 +46,8 @@ if (argv.t)	{
 	MPLAYER_EXEC += ' −sub ' + argv.t
 }
 
+
+
 var noop = function() {};
 
 peerflix(filename, argv, function(err, flix) {
@@ -64,6 +67,13 @@ peerflix(filename, argv, function(err, flix) {
 	server.on('listening', function() {
 		var href = 'http://'+address()+':'+server.address().port+'/';
 		var filename = storage.filename.split('/').pop().replace(/\{|\}/g, '');
+		
+		if(argv.d) {
+			var srt = filename.replace(/\.[^/.]+$/, "")+".srt";//.replace(/.mp4|.avi||/+".srt";
+			VLC_ARGS += ' --sub-file=' + srt
+			OMX_EXEC += ' --subtitles ' + srt
+			MPLAYER_EXEC += ' −sub ' + srt
+		}
 
 		if (argv.vlc) proc.exec('vlc '+href+' '+VLC_ARGS+' || /Applications/VLC.app/Contents/MacOS/VLC '+href+' '+VLC_ARGS);
 		if (argv.omx) proc.exec(OMX_EXEC+' '+href);
